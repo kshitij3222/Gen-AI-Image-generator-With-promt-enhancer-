@@ -27,7 +27,7 @@ import {
 
 import "./index.css";
 
-const API_URL = "http://localhost:5000";
+const API_URL = "https://gen-ai-image-generator-with-promt.onrender.com";
 
 const showcaseCards = [
   {

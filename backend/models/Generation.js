@@ -4,10 +4,10 @@ const generationSchema = new mongoose.Schema(
   {
 
     userId: {
-  type: String,
-  required: true,
-  index: true
-},
+      type: String,
+      required: true,
+      index: true
+    },
     // Original user prompt
     prompt: {
       type: String,
