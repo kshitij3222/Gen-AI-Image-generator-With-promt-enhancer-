@@ -3797,3 +3797,9 @@ body {
   object-fit: contain;
   display: block;
 }
+
+
+.footer-logo {
+  width: 28px;
+  height: 28px;
+}

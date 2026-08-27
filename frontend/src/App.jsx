@@ -1351,8 +1351,8 @@ function App() {
               <button
                 type="button"
                 className={`history-filter-button ${showFavoritesOnly
-                    ? "active"
-                    : ""
+                  ? "active"
+                  : ""
                   }`}
                 onClick={() =>
                   setShowFavoritesOnly(
@@ -1457,8 +1457,8 @@ function App() {
                         <button
                           type="button"
                           className={`history-action-button favorite-button ${item.favorite
-                              ? "favorited"
-                              : ""
+                            ? "favorited"
+                            : ""
                             }`}
                           onClick={() =>
                             toggleFavorite(
@@ -1608,8 +1608,8 @@ function App() {
                     <button
                       type="button"
                       className={`history-action-button favorite-button ${selectedHistoryImage.favorite
-                          ? "favorited"
-                          : ""
+                        ? "favorited"
+                        : ""
                         }`}
                       onClick={() =>
                         toggleFavorite(
@@ -2092,17 +2092,14 @@ function App() {
 
       <footer>
 
-        <div className="footer-brand">
-
-          <div className="brand-icon">
-            <Sparkles size={16} />
-          </div>
-
-          <strong>
-            Pixora AI
-          </strong>
-
+        <div className="brand-logo footer-logo">
+          <img
+            src={pixoraLogo}
+            alt="Pixora"
+          />
         </div>
+
+        <strong>Pixora</strong>
 
         <p>
           Intelligent text-to-image generation.
