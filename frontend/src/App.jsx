@@ -622,7 +622,7 @@ function App() {
 
     link.href = generatedImage;
     link.download =
-      "aura-ai-generated.png";
+      "Pixora-ai-generated.png";
 
     document.body.appendChild(link);
     link.click();
@@ -785,7 +785,7 @@ function App() {
 
     link.href = item.imageData;
     link.download =
-      `aura-ai-${item._id}.png`;
+      `Pixora-ai-${item._id}.png`;
 
     document.body.appendChild(link);
     link.click();
@@ -815,7 +815,7 @@ function App() {
             <Sparkles size={18} />
           </div>
 
-          <span>AURA</span>
+          <span>Pixora</span>
           <small>AI</small>
 
         </div>
@@ -1688,7 +1688,7 @@ function App() {
 
             <p>
               A glimpse of what you can
-              create with AURA AI.
+              create with Pixora AI.
             </p>
 
           </div>
@@ -1738,7 +1738,7 @@ function App() {
           <div className="section-heading centered">
 
             <span className="eyebrow">
-              WHY AURA AI
+              WHY Pixora AI
             </span>
 
             <h2>
@@ -1865,7 +1865,7 @@ function App() {
             </div>
 
             <span className="eyebrow">
-              AURA AI
+              Pixora AI
             </span>
 
             <h2>
@@ -1877,7 +1877,7 @@ function App() {
             <p className="auth-description">
               {authMode === "login"
                 ? "Sign in to continue creating amazing visuals."
-                : "Join AURA AI and start creating your imagination."}
+                : "Join Pixora AI and start creating your imagination."}
             </p>
 
             <form onSubmit={handleAuth}>
@@ -2105,7 +2105,7 @@ function App() {
           </div>
 
           <strong>
-            AURA AI
+            Pixora AI
           </strong>
 
         </div>
@@ -2115,7 +2115,7 @@ function App() {
         </p>
 
         <span>
-          © 2026 AURA AI
+          © 2026 Pixora AI
         </span>
 
       </footer>
