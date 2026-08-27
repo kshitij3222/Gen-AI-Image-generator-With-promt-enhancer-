@@ -24,6 +24,7 @@ import {
   Copy,
   Check
 } from "lucide-react";
+import pixoraLogo from "./assets/pixora-logo.png";
 
 import "./index.css";
 
