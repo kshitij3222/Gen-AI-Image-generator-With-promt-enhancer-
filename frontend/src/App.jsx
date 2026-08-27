@@ -11,8 +11,6 @@ import {
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import {
-  Grid2X2,
-  Clock3,
   Sparkles,
   ArrowUpRight,
   Download,
@@ -28,7 +26,6 @@ import {
 } from "lucide-react";
 
 import "./index.css";
-import pixoraLogo from "./assets/pixora-logo.png";
 
 const API_URL = "http://localhost:5000";
 
@@ -36,30 +33,22 @@ const showcaseCards = [
   {
     title: "Dreamscape",
     type: "Fantasy",
-    className: "art-one",
-    prompt:
-      "A dreamlike fantasy landscape filled with glowing flowers, ancient trees and soft magical light."
+    className: "art-one"
   },
   {
     title: "Neon Future",
     type: "Cyberpunk",
-    className: "art-two",
-    prompt:
-      "A futuristic cyberpunk city at night with neon architecture, glowing signs and cinematic atmosphere."
+    className: "art-two"
   },
   {
     title: "Cosmic Journey",
     type: "Sci-Fi",
-    className: "art-three",
-    prompt:
-      "A mysterious spacecraft travelling through a deep cosmic world with distant stars and glowing planets."
+    className: "art-three"
   },
   {
     title: "Mystic Forest",
-    type: "Nature",
-    className: "art-four",
-    prompt:
-      "An enchanted forest surrounded by mist, luminous plants and peaceful emerald-green light."
+    type: "Fantasy",
+    className: "art-four"
   }
 ];
 
@@ -100,13 +89,6 @@ function App() {
   const [aspectRatio, setAspectRatio] = useState("Square");
   const [selectedHistoryImage, setSelectedHistoryImage] = useState(null);
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
-
-  const [galleryFilter, setGalleryFilter] = useState("All");
-  const [selectedGalleryCard, setSelectedGalleryCard] = useState(null);
-
-  useEffect(() => {
-    document.title = "Pixora — AI Image Generator";
-  }, []);
 
   // ==========================================
   // AUTHENTICATION
@@ -318,7 +300,8 @@ function App() {
       await fetchHistory(firebaseToken);
 
       console.log(
-        `Firebase ${authMode === "login" ? "login" : "registration"
+        `Firebase ${
+          authMode === "login" ? "login" : "registration"
         } successful:`,
         firebaseUser.uid
       );
@@ -528,8 +511,8 @@ function App() {
             "Content-Type": "application/json",
             ...(currentToken
               ? {
-                Authorization: `Bearer ${currentToken}`
-              }
+                  Authorization: `Bearer ${currentToken}`
+                }
               : {})
           },
           body: JSON.stringify({
@@ -547,7 +530,7 @@ function App() {
       ) {
         throw new Error(
           enhanceData.message ||
-          "Failed to enhance prompt"
+            "Failed to enhance prompt"
         );
       }
 
@@ -569,8 +552,8 @@ function App() {
             "Content-Type": "application/json",
             ...(currentToken
               ? {
-                Authorization: `Bearer ${currentToken}`
-              }
+                  Authorization: `Bearer ${currentToken}`
+                }
               : {})
           },
           body: JSON.stringify({
@@ -618,7 +601,7 @@ function App() {
 
       alert(
         error.message ||
-        "Something went wrong while generating the image."
+          "Something went wrong while generating the image."
       );
     } finally {
       setLoading(false);
@@ -639,7 +622,7 @@ function App() {
 
     link.href = generatedImage;
     link.download =
-      "pixora-generated.png";
+      "aura-ai-generated.png";
 
     document.body.appendChild(link);
     link.click();
@@ -693,8 +676,8 @@ function App() {
           method: "DELETE",
           headers: token
             ? {
-              Authorization: `Bearer ${token}`
-            }
+                Authorization: `Bearer ${token}`
+              }
             : {}
         }
       );
@@ -704,7 +687,7 @@ function App() {
       if (!response.ok || !data.success) {
         throw new Error(
           data.message ||
-          "Failed to delete generation"
+            "Failed to delete generation"
         );
       }
 
@@ -741,8 +724,8 @@ function App() {
           method: "PATCH",
           headers: token
             ? {
-              Authorization: `Bearer ${token}`
-            }
+                Authorization: `Bearer ${token}`
+              }
             : {}
         }
       );
@@ -752,7 +735,7 @@ function App() {
       if (!response.ok || !data.success) {
         throw new Error(
           data.message ||
-          "Failed to update favorite"
+            "Failed to update favorite"
         );
       }
 
@@ -760,9 +743,9 @@ function App() {
         prevHistory.map((item) =>
           item._id === id
             ? {
-              ...item,
-              favorite: data.favorite
-            }
+                ...item,
+                favorite: data.favorite
+              }
             : item
         )
       );
@@ -771,9 +754,9 @@ function App() {
         (current) =>
           current?._id === id
             ? {
-              ...current,
-              favorite: data.favorite
-            }
+                ...current,
+                favorite: data.favorite
+              }
             : current
       );
     } catch (error) {
@@ -802,7 +785,7 @@ function App() {
 
     link.href = item.imageData;
     link.download =
-      `pixora-${item._id}.png`;
+      `aura-ai-${item._id}.png`;
 
     document.body.appendChild(link);
     link.click();
@@ -828,13 +811,12 @@ function App() {
 
         <div className="brand">
 
-          <img
-            src={pixoraLogo}
-            alt="Pixora"
-            className="pixora-brand-logo"
-          />
+          <div className="brand-icon">
+            <Sparkles size={18} />
+          </div>
 
-          <span className="brand-name">Pixora</span>
+          <span>AURA</span>
+          <small>AI</small>
 
         </div>
 
@@ -1352,9 +1334,9 @@ function App() {
           className="history-section"
         >
 
-          <div className="history-heading">
+          <div className="section-heading">
 
-            <div className="history-title-block">
+            <div>
 
               <span className="eyebrow">
                 YOUR CREATIONS
@@ -1365,98 +1347,33 @@ function App() {
                 <span> history.</span>
               </h2>
 
-              <p className="history-subtitle">
-                All the images you have created with Pixora.
-              </p>
-
             </div>
 
-            <div className="history-top-stats">
+            <div className="history-controls">
 
-              <div className="history-stat-pill">
-                <span className="history-stat-icon favorite-stat-icon">
-                  ❤️
-                </span>
+              <button
+                type="button"
+                className={`history-filter-button ${
+                  showFavoritesOnly
+                    ? "active"
+                    : ""
+                }`}
+                onClick={() =>
+                  setShowFavoritesOnly(
+                    !showFavoritesOnly
+                  )
+                }
+              >
+                ❤️ Favorites
+              </button>
 
-                <div>
-                  <strong>
-                    {history.filter((item) => item.favorite).length}
-                  </strong>
-
-                  <span>
-                    Favorites
-                  </span>
-                </div>
-              </div>
-
-              <div className="history-stat-pill">
-                <span className="history-stat-icon creation-stat-icon">
-                  <Grid2X2 size={16} />
-                </span>
-
-                <div>
-                  <strong>
-                    {history.length}
-                  </strong>
-
-                  <span>
-                    Creations
-                  </span>
-                </div>
+              <div className="history-count glass">
+                {history.length} creations
               </div>
 
             </div>
 
           </div>
-
-          {history.length > 0 && (
-            <div className="history-toolbar">
-
-              <div className="history-toolbar-left">
-
-                <button
-                  type="button"
-                  className={`history-filter-button ${!showFavoritesOnly
-                      ? "active"
-                      : ""
-                    }`}
-                  onClick={() =>
-                    setShowFavoritesOnly(false)
-                  }
-                >
-                  <Grid2X2 size={14} />
-                  All creations
-                </button>
-
-                <button
-                  type="button"
-                  className={`history-filter-button ${showFavoritesOnly
-                      ? "active"
-                      : ""
-                    }`}
-                  onClick={() =>
-                    setShowFavoritesOnly(true)
-                  }
-                >
-                  ❤️ Favorites
-                </button>
-
-              </div>
-
-              <div className="history-toolbar-count">
-                {showFavoritesOnly
-                  ? `${history.filter((item) => item.favorite).length} favorite ${history.filter((item) => item.favorite).length === 1
-                    ? "image"
-                    : "images"
-                  }`
-                  : `${history.length} ${history.length === 1
-                    ? "image"
-                    : "images"
-                  } generated`}
-              </div>
-
-            </div>
-          )}
 
           {history.length === 0 ? (
             <div className="empty-history glass">
@@ -1513,20 +1430,6 @@ function App() {
 
                     <div className="history-info">
 
-                      <div className="history-card-topline">
-
-                        <span className="history-card-label">
-                          AI CREATION
-                        </span>
-
-                        {item.favorite && (
-                          <span className="history-favorite-badge">
-                            ❤️ Favorite
-                          </span>
-                        )}
-
-                      </div>
-
                       <p className="history-prompt">
                         {item.prompt}
                       </p>
@@ -1548,27 +1451,20 @@ function App() {
                       </div>
 
                       <span className="history-date">
-                        <Clock3 size={12} />
                         {new Date(
                           item.createdAt
-                        ).toLocaleDateString(
-                          undefined,
-                          {
-                            day: "2-digit",
-                            month: "short",
-                            year: "numeric"
-                          }
-                        )}
+                        ).toLocaleDateString()}
                       </span>
 
                       <div className="history-actions">
 
                         <button
                           type="button"
-                          className={`history-action-button favorite-button ${item.favorite
+                          className={`history-action-button favorite-button ${
+                            item.favorite
                               ? "favorited"
                               : ""
-                            }`}
+                          }`}
                           onClick={() =>
                             toggleFavorite(
                               item._id
@@ -1636,83 +1532,6 @@ function App() {
           {/* ======================================
               FULL SCREEN IMAGE VIEWER
           ====================================== */}
-
-          {selectedGalleryCard && (
-            <div
-              className="gallery-preview-modal"
-              onClick={() => setSelectedGalleryCard(null)}
-            >
-
-              <div
-                className={`gallery-preview-card ${selectedGalleryCard.className}`}
-                onClick={(event) => event.stopPropagation()}
-              >
-
-                <button
-                  type="button"
-                  className="gallery-preview-close"
-                  onClick={() => setSelectedGalleryCard(null)}
-                  aria-label="Close preview"
-                >
-                  <X size={18} />
-                </button>
-
-                <div className="gallery-preview-art">
-                  <div className="gallery-preview-badge">
-                    {selectedGalleryCard.type}
-                  </div>
-                </div>
-
-                <div className="gallery-preview-info">
-
-                  <span className="eyebrow">
-                    FEATURED CREATION
-                  </span>
-
-                  <h3>
-                    {selectedGalleryCard.title}
-                  </h3>
-
-                  <p>
-                    {selectedGalleryCard.prompt}
-                  </p>
-
-                  <div className="gallery-preview-actions">
-
-                    <button
-                      type="button"
-                      className="gallery-preview-primary"
-                      onClick={() => {
-                        setPrompt(selectedGalleryCard.prompt);
-                        setSelectedGalleryCard(null);
-                        window.location.hash = "create";
-                      }}
-                    >
-                      <WandSparkles size={16} />
-                      Use this prompt
-                    </button>
-
-                    <button
-                      type="button"
-                      className="gallery-preview-secondary"
-                      onClick={() =>
-                        navigator.clipboard?.writeText(
-                          selectedGalleryCard.prompt
-                        )
-                      }
-                    >
-                      <Copy size={16} />
-                      Copy prompt
-                    </button>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-          )}
 
           {selectedHistoryImage && (
             <div
@@ -1793,10 +1612,11 @@ function App() {
 
                     <button
                       type="button"
-                      className={`history-action-button favorite-button ${selectedHistoryImage.favorite
+                      className={`history-action-button favorite-button ${
+                        selectedHistoryImage.favorite
                           ? "favorited"
                           : ""
-                        }`}
+                      }`}
                       onClick={() =>
                         toggleFavorite(
                           selectedHistoryImage._id
@@ -1868,7 +1688,7 @@ function App() {
 
             <p>
               A glimpse of what you can
-              create with Pixora.
+              create with AURA AI.
             </p>
 
           </div>
@@ -1876,14 +1696,10 @@ function App() {
           <div className="art-grid">
 
             {showcaseCards.map((card) => (
-              <button
-                type="button"
+              <div
                 className={`art-card ${card.className}`}
                 key={card.title}
-                onClick={() => setSelectedGalleryCard(card)}
               >
-
-                <div className="art-card-shine" />
 
                 <div className="art-overlay">
 
@@ -1899,136 +1715,12 @@ function App() {
 
                   </div>
 
-                  <span className="art-open">
-                    <ArrowUpRight size={19} />
-                  </span>
+                  <ArrowUpRight size={20} />
 
                 </div>
 
-              </button>
+              </div>
             ))}
-
-          </div>
-
-          <div className="community-heading">
-
-            <div>
-
-              <span className="eyebrow">
-                FEATURED CREATIONS
-              </span>
-
-              <h3>
-                Created with
-                <span> Pixora.</span>
-              </h3>
-
-              <p>
-                Explore visual ideas and get inspired for your next creation.
-              </p>
-
-            </div>
-
-            <div className="gallery-filter-group">
-
-              {["All", "Fantasy", "Cyberpunk", "Sci-Fi", "Nature"].map(
-                (filter) => (
-                  <button
-                    type="button"
-                    key={filter}
-                    className={`gallery-filter ${galleryFilter === filter
-                        ? "active"
-                        : ""
-                      }`}
-                    onClick={() => setGalleryFilter(filter)}
-                  >
-                    {filter}
-                  </button>
-                )
-              )}
-
-            </div>
-
-          </div>
-
-          <div className="community-grid">
-
-            {showcaseCards
-              .filter(
-                (card) =>
-                  galleryFilter === "All" ||
-                  card.type === galleryFilter
-              )
-              .map((card, index) => (
-                <button
-                  type="button"
-                  className={`community-card ${card.className}`}
-                  key={`${card.title}-community`}
-                  onClick={() => setSelectedGalleryCard(card)}
-                >
-
-                  <div className="community-card-image">
-
-                    <span className="community-index">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-
-                    <span className="community-view">
-                      View <ArrowUpRight size={14} />
-                    </span>
-
-                  </div>
-
-                  <div className="community-card-info">
-
-                    <div>
-
-                      <span>
-                        {card.type}
-                      </span>
-
-                      <strong>
-                        {card.title}
-                      </strong>
-
-                    </div>
-
-                    <ArrowUpRight size={16} />
-
-                  </div>
-
-                </button>
-              ))}
-
-          </div>
-
-          <div className="gallery-cta glass">
-
-            <div className="gallery-cta-icon">
-              <WandSparkles size={19} />
-            </div>
-
-            <div>
-
-              <strong>
-                Have an idea in mind?
-              </strong>
-
-              <span>
-                Turn your imagination into an original image with Pixora.
-              </span>
-
-            </div>
-
-            <button
-              type="button"
-              onClick={() => {
-                window.location.hash = "create";
-              }}
-            >
-              Start creating
-              <ArrowUpRight size={16} />
-            </button>
 
           </div>
 
@@ -2046,7 +1738,7 @@ function App() {
           <div className="section-heading centered">
 
             <span className="eyebrow">
-              WHY Pixora
+              WHY AURA AI
             </span>
 
             <h2>
@@ -2168,16 +1860,12 @@ function App() {
               <X size={20} />
             </button>
 
-            <div className="auth-icon pixora-auth-logo-wrap">
-              <img
-                src={pixoraLogo}
-                alt="Pixora"
-                className="pixora-auth-logo"
-              />
+            <div className="auth-icon">
+              <Sparkles size={24} />
             </div>
 
             <span className="eyebrow">
-              PIXORA
+              AURA AI
             </span>
 
             <h2>
@@ -2189,7 +1877,7 @@ function App() {
             <p className="auth-description">
               {authMode === "login"
                 ? "Sign in to continue creating amazing visuals."
-                : "Join Pixora and start creating your imagination."}
+                : "Join AURA AI and start creating your imagination."}
             </p>
 
             <form onSubmit={handleAuth}>
@@ -2408,35 +2096,27 @@ function App() {
           FOOTER
       ====================================== */}
 
-      <footer className="pixora-footer">
+      <footer>
 
-        <div className="footer-copy">
+        <div className="footer-brand">
+
+          <div className="brand-icon">
+            <Sparkles size={16} />
+          </div>
 
           <strong>
-            Pixora
+            AURA AI
           </strong>
 
-          <span>
-            Intelligent text-to-image generation.
-          </span>
-
         </div>
 
-        <div className="footer-meta">
+        <p>
+          Intelligent text-to-image generation.
+        </p>
 
-          <span>
-            © 2026 Pixora
-          </span>
-
-          <span className="footer-dot">
-            •
-          </span>
-
-          <span>
-            Built for creators
-          </span>
-
-        </div>
+        <span>
+          © 2026 AURA AI
+        </span>
 
       </footer>
 
