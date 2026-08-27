@@ -24,7 +24,6 @@ import {
   Copy,
   Check
 } from "lucide-react";
-import pixoraLogo from "./assets/pixora-logo.png";
 
 import "./index.css";
 
@@ -811,7 +810,7 @@ function App() {
 
         <div className="brand-logo">
           <img
-            src="/assets/pixora-logo.png"
+            src="/pixora-logo.png"
             alt="Pixora"
           />
         </div>
@@ -2091,26 +2090,24 @@ function App() {
           FOOTER
       ====================================== */}
 
-      <footer>
+      <footer className="site-footer">
+  <div className="footer-brand">
+    <img
+      src="/pixora-logo.png"
+      alt="Pixora"
+      className="footer-logo"
+    />
+    <span>Pixora</span>
+  </div>
 
-        <div className="brand-logo footer-logo">
-          <img
-            src={pixoraLogo}
-            alt="Pixora"
-          />
-        </div>
+  <div className="footer-tagline">
+    Intelligent text-to-image generation.
+  </div>
 
-        <strong>Pixora</strong>
-
-        <p>
-          Intelligent text-to-image generation.
-        </p>
-
-        <span>
-          © 2026 Pixora AI
-        </span>
-
-      </footer>
+  <div className="footer-copy">
+    © 2026 Pixora AI
+  </div>
+</footer>
 
     </div>
   );
