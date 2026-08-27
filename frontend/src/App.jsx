@@ -300,8 +300,7 @@ function App() {
       await fetchHistory(firebaseToken);
 
       console.log(
-        `Firebase ${
-          authMode === "login" ? "login" : "registration"
+        `Firebase ${authMode === "login" ? "login" : "registration"
         } successful:`,
         firebaseUser.uid
       );
@@ -511,8 +510,8 @@ function App() {
             "Content-Type": "application/json",
             ...(currentToken
               ? {
-                  Authorization: `Bearer ${currentToken}`
-                }
+                Authorization: `Bearer ${currentToken}`
+              }
               : {})
           },
           body: JSON.stringify({
@@ -530,7 +529,7 @@ function App() {
       ) {
         throw new Error(
           enhanceData.message ||
-            "Failed to enhance prompt"
+          "Failed to enhance prompt"
         );
       }
 
@@ -552,8 +551,8 @@ function App() {
             "Content-Type": "application/json",
             ...(currentToken
               ? {
-                  Authorization: `Bearer ${currentToken}`
-                }
+                Authorization: `Bearer ${currentToken}`
+              }
               : {})
           },
           body: JSON.stringify({
@@ -601,7 +600,7 @@ function App() {
 
       alert(
         error.message ||
-          "Something went wrong while generating the image."
+        "Something went wrong while generating the image."
       );
     } finally {
       setLoading(false);
@@ -676,8 +675,8 @@ function App() {
           method: "DELETE",
           headers: token
             ? {
-                Authorization: `Bearer ${token}`
-              }
+              Authorization: `Bearer ${token}`
+            }
             : {}
         }
       );
@@ -687,7 +686,7 @@ function App() {
       if (!response.ok || !data.success) {
         throw new Error(
           data.message ||
-            "Failed to delete generation"
+          "Failed to delete generation"
         );
       }
 
@@ -724,8 +723,8 @@ function App() {
           method: "PATCH",
           headers: token
             ? {
-                Authorization: `Bearer ${token}`
-              }
+              Authorization: `Bearer ${token}`
+            }
             : {}
         }
       );
@@ -735,7 +734,7 @@ function App() {
       if (!response.ok || !data.success) {
         throw new Error(
           data.message ||
-            "Failed to update favorite"
+          "Failed to update favorite"
         );
       }
 
@@ -743,9 +742,9 @@ function App() {
         prevHistory.map((item) =>
           item._id === id
             ? {
-                ...item,
-                favorite: data.favorite
-              }
+              ...item,
+              favorite: data.favorite
+            }
             : item
         )
       );
@@ -754,9 +753,9 @@ function App() {
         (current) =>
           current?._id === id
             ? {
-                ...current,
-                favorite: data.favorite
-              }
+              ...current,
+              favorite: data.favorite
+            }
             : current
       );
     } catch (error) {
@@ -809,16 +808,14 @@ function App() {
 
       <header className="navbar glass">
 
-        <div className="brand">
-
-          <div className="brand-icon">
-            <Sparkles size={18} />
-          </div>
-
-          <span>Pixora</span>
-          <small>AI</small>
-
+        <div className="brand-logo">
+          <img
+            src="/assets/pixora-logo.png"
+            alt="Pixora"
+          />
         </div>
+
+        <span>Pixora</span>
 
         <nav
           className={
@@ -1353,11 +1350,10 @@ function App() {
 
               <button
                 type="button"
-                className={`history-filter-button ${
-                  showFavoritesOnly
+                className={`history-filter-button ${showFavoritesOnly
                     ? "active"
                     : ""
-                }`}
+                  }`}
                 onClick={() =>
                   setShowFavoritesOnly(
                     !showFavoritesOnly
@@ -1460,11 +1456,10 @@ function App() {
 
                         <button
                           type="button"
-                          className={`history-action-button favorite-button ${
-                            item.favorite
+                          className={`history-action-button favorite-button ${item.favorite
                               ? "favorited"
                               : ""
-                          }`}
+                            }`}
                           onClick={() =>
                             toggleFavorite(
                               item._id
@@ -1612,11 +1607,10 @@ function App() {
 
                     <button
                       type="button"
-                      className={`history-action-button favorite-button ${
-                        selectedHistoryImage.favorite
+                      className={`history-action-button favorite-button ${selectedHistoryImage.favorite
                           ? "favorited"
                           : ""
-                      }`}
+                        }`}
                       onClick={() =>
                         toggleFavorite(
                           selectedHistoryImage._id
